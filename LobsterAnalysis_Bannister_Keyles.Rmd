@@ -6,16 +6,47 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, include = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
 ```
 
 ```{r}
 # Attach packages
 library(tidyverse)
 library(here)
+library(janitor)
+library(ggridges)
+library(plotrix)
+library(viridis)
+library(plotly)
 
 # Read in data file: lobster_abundance_sbc_lter.csv
 
 lobster_abun <- read_csv(here("raw_data","lobster_abundance_sbc_lter.csv"))
+```
+
+```{r}
+
+
+lobster_clean <- lobster_abun %>% 
+  clean_names()
+
+lobster_a <- lobster_clean %>% 
+  select(year, site, count) %>% 
+  group_by(year, site) %>% 
+  summarize(annual_total = sum(count))
+
+graph_a <- ggplot(lobster_a, aes(x = year, y = annual_total, group = site, color = site)) +
+  geom_line() +
+  theme_minimal() +
+  scale_color_viridis (discrete = TRUE) +
+  labs(
+    x = "Year",
+    y = "Total annual lobsters counted",
+    title = "Year-over-year lobster count change, 
+    Santa Barbara County"
+  )
+  
+ggplotly(graph_a)
+  
 ```
 
