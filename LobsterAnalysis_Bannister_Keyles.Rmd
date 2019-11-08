@@ -1,0 +1,21 @@
+---
+title: 'Assignment 4: Lobster Abundance'
+author: "Indigo Bannister & Gavriella Keyles"
+date: "11/8/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, include = FALSE)
+```
+
+```{r}
+# Attach packages
+library(tidyverse)
+library(here)
+
+# Read in data file: lobster_abundance_sbc_lter.csv
+
+lobster_abun <- read_csv(here("raw_data","lobster_abundance_sbc_lter.csv"))
+```
+
