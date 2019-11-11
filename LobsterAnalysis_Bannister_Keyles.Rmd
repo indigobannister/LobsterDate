@@ -1,15 +1,20 @@
 ---
-title: 'Assignment 4: Lobster Abundance'
+title: 'Analysis of Lobster Abundance along the Santa Barbara Coast'
 author: "Indigo Bannister & Gavriella Keyles"
-date: "11/8/2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
+
 ```{r}
+# In order to install NPS colors, use following code:
+## install.packages("devtools")
+## devtools::install_github("katiejolly/nationalparkcolors") - request help loading
+
 # Attach packages
 library(tidyverse)
 library(tidyr)
@@ -18,21 +23,33 @@ library(janitor)
 library(ggridges)
 library(viridis)
 library(plotly)
+#library(nationalparkcolors)
 
 # Read in data file: lobster_abundance_sbc_lter.csv
-
 lobster_abun <- read_csv(here("raw_data","lobster_abundance_sbc_lter.csv"),
                          na = "-99999")
-```
 
-```{r}
-
-
+# Clean lobster_abun dataframe: update column names and make data tidy
 lobster_clean <- lobster_abun %>% 
   clean_names() %>% 
   tidyr::uncount(count)
 
+```
 
+### Introduction
+Gavi to write paragraph here on introduction. 
+
+![**Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman](https://www.flickr.com/people/26216388@N02).](images/California_Spiny_Lobster.jpg)
+
+
+### Data & Methods
+Indigo to write paragraph here about data and methods.
+
+### Results
+#### 1. Annual lobster abundance by site
+Add description of analysis here. 
+
+```{r}
 # Part A
 lobster_a <- lobster_clean %>% 
   select(year, site) %>% 
@@ -54,6 +71,11 @@ ggplotly(graph_a)
   
 ```
 
+**Figure 2:** Add figure caption here
+
+#### 2. Lobster size: 2012 to 2018
+Add description of analysis here. 
+
 ```{r}
 # Part B
 lobster_2018 <- lobster_clean %>% 
@@ -65,10 +87,39 @@ lobster_2012 <- lobster_clean %>%
   filter(year %in% c(2012))
 
 graph_b <- ggplot() +
-  geom_density_ridges(data = lobster_2018, aes(x = size_mm, y = site)) +
-  geom_density_ridges(data = lobster_2012, aes(x = size_mm, y = site))
+  geom_density_ridges(data = lobster_2012, 
+                      aes(x = size_mm, y = site), 
+                      fill = "firebrick", 
+                      color = "white", 
+                      alpha = 0.5,
+                      scale = 0.9) +
+    geom_density_ridges(data = lobster_2018, 
+                      aes(x = size_mm, y = site), 
+                      fill = "skyblue4",
+                      color = "white",
+                      alpha = 0.5,
+                      scale = 0.9) +
+  theme_minimal() +
+  labs(x = "Lobster size (mm)",
+       y = "Study sites")
 
 graph_b
 
+# Talk to Gavi about x-scale and best way to give better labels to y-axis - believe we may need to factor so that MPAs are adjacent
+
 ```
 
+**Figure 3:** Add figure caption here
+
+#### 3. Analysis of lobsters in marine protected areas versus non-protected areas
+Add description of analysis here. 
+
+```{r}
+
+```
+
+
+### Summary
+
+### References
+**Reed D. 2019.** [SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012.](https://doi.org/10.6073/pasta/a593a675d644fdefb736750b291579a0) Environmental Data Initiative. Dataset accessed 10/30/2019.
