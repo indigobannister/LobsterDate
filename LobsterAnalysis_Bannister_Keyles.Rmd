@@ -46,8 +46,8 @@ Gavi to write paragraph here on introduction.
 Indigo to write paragraph here about data and methods.
 
 ### Results
-#### 1. Annual lobster abundance by site
-Add description of analysis here. 
+#### 1. Annual lobster abundance by site, 2012-2018
+**Analysis:** Figure 2 demonstrates varying trends in lobster abundance among the 5 collection sites. At Isla Vista and Naples, both located within Marine Protected Areas, trends year-over-year change. Both MPA sites saw spikes in 2015, declines in 2016 followed by increases in population. At non-MPA sites, counts are highly variable and characteristics between sites are not shared. At Arroyo Quemado, lobster counts remained relatively stable over the studied time period. At Carpinteria, a major spike in lobster abundance (2017) was followed by a major decline (2018). At Mohawk, a spike in abundance in 2015 gives way to stability into 2018.
 
 ```{r}
 # Part A
@@ -59,19 +59,21 @@ lobster_a <- lobster_clean %>%
 graph_a <- ggplot(lobster_a, aes(x = year, y = annual_total, group = site, color = site)) +
   geom_line() +
   theme_minimal() +
-  scale_color_viridis (discrete = TRUE) +
+  scale_color_viridis (discrete = TRUE, 
+                       name = "Site") +
   labs(
-    x = "Year",
-    y = "Total annual lobsters counted",
+    x = "",
+    y = "Total lobsters counted",
     title = "Year-over-year lobster count change, 
     Santa Barbara County"
-  )
+    )+
+  theme(plot.title = element_text(hjust = 0.5))
   
 ggplotly(graph_a)
   
 ```
 
-**Figure 2:** Add figure caption here
+**Figure 2:** **Year-over-year change, lobsters counted in 5 Santa Barbara Channel sites, 2012-2018.** Annual lobsters counts based on data collected by divers before the start of fishing season in late summer at five sites, two of which (Isla Vista and Naples) are within Marine Protected Areas (MPA). **Interactive; double-click on individual site within legend to highlight. Single-click and unclick sites to toggle visibility and compare site data.**
 
 #### 2. Lobster size: 2012 to 2018
 Add description of analysis here. 
