@@ -69,7 +69,8 @@ graph_a <- ggplot(lobster_a, aes(x = year, y = annual_total, group = site, color
     )+
   theme(plot.title = element_text(hjust = 0.5))
   
-ggplotly(graph_a)
+ggplotly(graph_a) %>%
+  config(displayModeBar = FALSE)
   
 ```
 
