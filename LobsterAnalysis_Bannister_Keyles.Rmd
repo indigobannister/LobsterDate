@@ -32,7 +32,12 @@ lobster_abun <- read_csv(here("raw_data","lobster_abundance_sbc_lter.csv"),
 # Clean lobster_abun dataframe: update column names and make data tidy
 lobster_clean <- lobster_abun %>% 
   clean_names() %>% 
-  tidyr::uncount(count)
+  tidyr::uncount(count) %>% 
+    mutate(site_name = 
+           ifelse(site == "IVEE", "Isla Vista",
+         ifelse(site == "AQUE", "Arroyo Quemado",
+         ifelse(site == "CARP", "Carpinteria",
+         ifelse(site == "NAPL", "Naples", "Mohawk")))))
 
 ```
 
@@ -118,7 +123,13 @@ graph_b
 Add description of analysis here. 
 
 ```{r}
+# Part C
 
+#Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
+
+lobster_c <- lobster_clean %>% 
+  mutate(mpa_status = 
+           ifelse(site %in% c("IVEE", "NAPL"), "MPA", "non-MPA"))
 ```
 
 
