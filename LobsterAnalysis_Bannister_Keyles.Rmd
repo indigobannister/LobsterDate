@@ -55,9 +55,14 @@ Gavi to write paragraph here on introduction.
 
 
 ### Data & Methods
-Indigo to write paragraph here about data and methods.
+Data for California spiny lobster abundance and size along the Santa Barbara Coast, 2012-2018, were collected by the [Santa Barbara Coastal Long Term Ecological Research group](https://sbclter.msi.ucsb.edu/). Data was collected annually at five long term kelp forest study sites. Two of the sites were located within Marine Protected Areas (Naples and Isla Vista) and three were outside of a MPA (Arroyo Quemado, Mohawk and Carpinteria). Lobsters were counted and sizes estimated visually by divers in late summer before fishing season began. For more information on the methods, see the project [metadata](https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-sbc.77.3).
+
+ADD SOMETHING HERE ABOUT ANALYSIS. Similar to "Mean griffin range area (km2) was compared for pre-dragon (1984 - 2004) and post-dragon (2005 - 2019) periods by two-sample t-tests (α = 0.05 throughout). Trends in Griffin abundance were compared before and after dragon reintroduction by linear regression. All analyses and figures were prepared using R software version 3.6.1."
 
 ### Results
+
+\
+
 #### 1. Annual lobster abundance by site, 2012-2018
 **Analysis:** Figure 2 demonstrates varying trends in lobster abundance among the 5 collection sites. At Isla Vista and Naples, both located within Marine Protected Areas, lobster abundance trends positive over the duration. Both MPA sites saw spikes in 2015, declines in 2016 followed by increases in population. At non-MPA sites, counts are highly variable and characteristics between sites are not shared. At Arroyo Quemado, lobster counts remained relatively stable over the studied time period. At Carpinteria, a major spike in lobster abundance (2017) was followed by a major decline (2018). At Mohawk, a spike in abundance in 2015 gives way to stability into 2018.
 
@@ -94,6 +99,8 @@ ggplotly(graph_a, tooltip = c("site_name", "x", "y")) %>%
 ```
 
 **Figure 2:** **Year-over-year change, lobsters counted in 5 Santa Barbara Channel sites, 2012-2018.** Annual lobsters counts based on data collected by divers before the start of fishing season in late summer at five sites, two of which (Isla Vista and Naples) are within Marine Protected Areas (MPA). **Interactive:** double-click on individual site within legend to highlight. Single-click and unclick sites to toggle visibility and compare site data.
+
+\
 
 #### 2. Lobster size: 2012 to 2018
 Add description of analysis here. 
@@ -135,6 +142,8 @@ graph_b
 
 **Figure 3:** Add figure caption here
 
+\
+
 #### 3. Analysis of lobsters in marine protected areas versus non-protected areas
 Add description of analysis here. 
 
@@ -148,8 +157,11 @@ lobster_c <- lobster_clean %>%
            ifelse(site %in% c("IVEE", "NAPL"), "MPA", "non-MPA"))
 ```
 
+\
 
 ### Summary
+
+\
 
 ### References
 **Reed D. 2019.** [SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012.](https://doi.org/10.6073/pasta/a593a675d644fdefb736750b291579a0) Environmental Data Initiative. Dataset accessed 10/30/2019.
