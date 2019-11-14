@@ -52,7 +52,7 @@ lobster_clean <- lobster_abun %>%
 ### Introduction
 Gavi to write paragraph here on introduction. 
 
-![**Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman](https://www.flickr.com/people/26216388@N02).](images/California_Spiny_Lobster.jpg)
+![<font size="1"> **Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman</font>](https://www.flickr.com/people/26216388@N02).](images/California_Spiny_Lobster.jpg)
 
 
 ### Data & Methods
@@ -65,7 +65,7 @@ ADD SOMETHING HERE ABOUT ANALYSIS. Similar to "Mean griffin range area (km2) was
 \
 
 #### 1. Annual lobster abundance by site, 2012-2018
-**Analysis:** Figure 2 demonstrates varying trends in lobster abundance among the 5 collection sites. At Isla Vista and Naples, both located within Marine Protected Areas, lobster abundance trends positive over the duration. Both MPA sites saw spikes in 2015, declines in 2016 followed by increases in population. At non-MPA sites, counts are highly variable and characteristics between sites are not shared. At Arroyo Quemado, lobster counts remained relatively stable over the studied time period. At Carpinteria, a major spike in lobster abundance (2017) was followed by a major decline (2018). At Mohawk, a spike in abundance in 2015 gives way to stability into 2018.
+**Analysis:** Figure 2 demonstrates varying trends in lobster abundance among the 5 collection sites. At Isla Vista and Naples, both located within Marine Protected Areas, lobster abundance trends positive after the MPAs were established in 2012. Both MPA sites saw spikes in 2015, and declines in 2016 followed by increases in population. At non-MPA sites, counts are highly variable and characteristics between sites are not shared. At Arroyo Quemado, lobster counts remained relatively stable over the studied time period. At Carpinteria, a major spike in lobster abundance (2017) was followed by a major decline (2018). At Mohawk, a spike in abundance in 2015 gives way to stability into 2018.
 
 ```{r}
 # Create filtered dataframe for abundance graph
@@ -85,7 +85,7 @@ graph_a <- ggplot(lobster_a, aes(color = site_name, x = year, y = annual_total))
   labs(
     x = "",
     y = "Total lobsters counted",
-    title = "Year-over-year lobster count change",
+    title = "Year-over-year lobster count change", #IB would recommend removing title since we have a figure caption
     subtitle = "Santa Barbara County") +
   theme(plot.title = element_text(hjust = 0.5)) + 
   scale_x_continuous(limits = c(2012, 2018),
@@ -100,15 +100,19 @@ ggplotly(graph_a, tooltip = c("site_name", "y")) %>%
   layout(legend = list(orientation = "h", y = -0.1))
 
 # This website has lots of resources to customize ggplotly https://plotly-r.com/controlling-tooltips.html 
-  
+
+# IB played around and tried to get more space between years and beginning of graph - have not been able to get there yet. Also in midst of getting all of legend on one line. 
 ```
 
-**Figure 2:** **Year-over-year change, lobsters counted in 5 Santa Barbara Channel sites, 2012-2018.** Annual lobsters counts based on data collected by divers before the start of fishing season in late summer at five sites, two of which (Isla Vista and Naples) are within Marine Protected Areas (MPA). **Interactive:** double-click on individual site within legend to highlight. Single-click and unclick sites to toggle visibility and compare site data.
+<font size="1"> ***Figure 2: Year-over-year change, lobsters counted in 5 Santa Barbara Channel sites, 2012-2018.*** *Annual lobsters counts based on data collected by divers before the start of fishing season in late summer at five sites, two of which (Isla Vista and Naples) are within Marine Protected Areas (MPA).* ***Interactive:*** *double-click on individual site within legend to highlight. Single-click and unclick sites to toggle visibility and compare site data.*</font>
 
 \
 
 #### 2. Lobster size: 2012 to 2018
-Add description of analysis here. 
+**Analysis:** Figure 3 depicts size abundance trends amongst lobsters in 2012 and 2018 at the five collection sites. Both sites that established MPAs in 2012 (Isla Vista and Naples) had more larger lobsters by 2018 than they did when the MPAs were established. Median sizes for Isla Vista lobsters increased from 61 mm to 78 mm, while median sizes for Naples lobsters increased from 70 mm to 80.5 mm.
+
+Lobster sizes at the non-MPA sites stayed relatively stable across the time duration with median sizes not shifting greatly. 
+
 
 ```{r}
 # Create two dataframes filtered for size analysis, one for lobster size data in 2012 and the other for 2018
@@ -120,11 +124,20 @@ lobster_2012 <- lobster_clean %>%
   select(year, size_mm, site_name) %>% 
   filter(year %in% c(2012))
 
+# Create two dataframes with calculated medians for lobster size in 2012 and 2018 at each site
+lobster_2018_med <- lobster_2018 %>% 
+  group_by(site_name) %>% 
+  summarize(median = median(size_mm))
+
+lobster_2012_med <- lobster_2012 %>% 
+  group_by(site_name) %>% 
+  summarize(median = median(size_mm))
+
 # Create graph of lobster size distribution for 2012 and 2018 at each site
 graph_b <- ggplot() +
   geom_density_ridges(data = lobster_2012, 
                       aes(x = size_mm, y = reorder(site_name, desc(site_name))), 
-                      fill = "firebrick", 
+                      fill = "#1F304A", 
                       color = "white", 
                       alpha = 0.5,
                       scale = 0.9) +
@@ -132,12 +145,12 @@ graph_b <- ggplot() +
                       aes(x = size_mm, y = reorder(site_name, desc(site_name))), 
                       fill = "skyblue4",
                       color = "white",
-                      alpha = 0.5,
+                      alpha = 0.4,
                       scale = 0.9) +
   theme_minimal() +
   labs(x = "Lobster size (mm)",
        y = "Study sites") + 
-  scale_x_continuous(limits = c(0,125))
+  scale_x_continuous(limits = c(40,120))
 
 # Call graph_b
 graph_b
@@ -146,7 +159,8 @@ graph_b
 
 ```
 
-**Figure 3:** Add figure caption here
+<font size="1"> ***Figure 3: Comparison of distribution of sampled lobster size at five sampling sites, 2012 & 2018***
+*Distribution of lobster size at five sampling sites in two different years, 2012 and 2018. Two of the five sites (Isla Vista and Naples) established Marine Protected Areas (MPAs) in 2012. These two sites had more lobsters of larger size in 2018 than in 2012. The other three sites not in MPAs had more consistent size distribution across the two years.* </font>
 
 \
 
@@ -156,7 +170,7 @@ Add description of analysis here.
 ```{r}
 # Part C
 
-#Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
+# Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
 
 lobster_c <- lobster_clean %>% 
   mutate(mpa_status = 
