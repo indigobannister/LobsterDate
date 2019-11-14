@@ -109,7 +109,7 @@ ggplotly(graph_a, tooltip = c("site_name", "y")) %>%
 \
 
 #### 2. Lobster size: 2012 to 2018
-**Analysis:** Figure 3 depicts size abundance trends amongst lobsters in 2012 and 2018 at the five collection sites. Both sites that established MPAs in 2012 (Isla Vista and Naples) had more larger lobsters by 2018 than they did when the MPAs were established. Median sizes for Isla Vista lobsters increased from 61 mm to 78 mm, while median sizes for Naples lobsters increased from 70 mm to 80.5 mm.
+**Analysis:** Figure 3 depicts size abundance trends amongst lobsters in 2012 and 2018 at the five collection sites. Both sites that established MPAs in 2012 (Isla Vista and Naples) had more larger lobsters by 2018 than they did when the MPAs were established. Median sizes for Isla Vista lobsters increased from MAKE INLINE (61 mm to 78 mm), while median sizes for Naples lobsters increased from MAKE INLINE (70 mm to 80.5 mm).
 
 Lobster sizes at the non-MPA sites stayed relatively stable across the time duration with median sizes not shifting greatly. 
 
@@ -228,27 +228,29 @@ ttest_nonMPA
 lobster_sum <- lobster_c %>% 
   filter(year %in% c(2012, 2018)) %>% 
   group_by(year, mpa_status) %>%
-  summarize(mean = mean(size_mm), std_dev = sd(size_mm), samp_size = n())
+  summarize(mean = round(mean(size_mm),2),
+            std_dev = round(sd(size_mm),2), 
+            samp_size = n())
 
 lobster_sum %>% 
   kable(col.names = c("Year", 
                      "MPA Status", 
                      "Mean (mm)",
                      "Standard Deviation (mm)",
-                     "Sample Size")
-        ) %>% 
-  kable_styling(bootstrap_options = "striped", 
+                     "Sample Size")) %>% 
+  kable_styling(bootstrap_options = c("striped", "hover"), 
                 full_width = F,
                 position = "left"
                 )
 
 
 ```
-
+INDIGO TO ADD TABLE HEADER
+GAVI TO ADD INLINE REFERENCES
 
 \
 
-### Summary
+### Summary (INDIGO)
 
 \
 
