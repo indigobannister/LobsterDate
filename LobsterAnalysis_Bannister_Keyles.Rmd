@@ -24,10 +24,11 @@ library(tidyr)
 library(here)
 library(janitor)
 library(ggridges)
-library(viridis)
+# library(viridis)
 library(plotly)
 library(extrafont)
 library(nationalparkcolors)
+library(kableExtra)
 
 # Load fonts
 loadfonts()
@@ -173,11 +174,11 @@ Add description of analysis here.
 # Part C
 
 # Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
-
 lobster_c <- lobster_clean %>% 
   mutate(mpa_status = 
            ifelse(site %in% c("IVEE", "NAPL"), "MPA", "non-MPA"))
 
+# Create dataframes to insert into t-tests for Part C 1 & 2
 mpa_size_compare_2012 <- lobster_c %>% 
   select(mpa_status, size_mm, year) %>% 
   filter(year == "2012", mpa_status == "MPA") %>% 
@@ -198,6 +199,7 @@ non_mpa_size_compare_2018 <- lobster_c %>%
   filter(year == "2018", mpa_status == "non-MPA") %>% 
   pull(size_mm)
 
+# Run t-tests for 2012 and 2018 in MPA vs. non-MPA
 size_ttest_2012 <- t.test(mpa_size_compare_2012, non_mpa_size_compare_2012)
 
 size_ttest_2012
@@ -206,12 +208,43 @@ size_ttest_2018 <- t.test(mpa_size_compare_2018, non_mpa_size_compare_2018)
 
 size_ttest_2018
 
+## Run t-tests for MPA and non-MPA for 2012 vs. 2018
+ttest_MPA <- t.test(mpa_size_compare_2012, mpa_size_compare_2018)
 
+ttest_MPA
 
+ttest_nonMPA <- t.test(non_mpa_size_compare_2012, non_mpa_size_compare_2018)
+
+ttest_nonMPA
   
 
 
 ```
+
+```{r}
+# Part C continued - create table of results
+
+# Create table of summary stats
+lobster_sum <- lobster_c %>% 
+  filter(year %in% c(2012, 2018)) %>% 
+  group_by(year, mpa_status) %>%
+  summarize(mean = mean(size_mm), std_dev = sd(size_mm), samp_size = n())
+
+lobster_sum %>% 
+  kable(col.names = c("Year", 
+                     "MPA Status", 
+                     "Mean (mm)",
+                     "Standard Deviation (mm)",
+                     "Sample Size")
+        ) %>% 
+  kable_styling(bootstrap_options = "striped", 
+                full_width = F,
+                position = "left"
+                )
+
+
+```
+
 
 \
 
