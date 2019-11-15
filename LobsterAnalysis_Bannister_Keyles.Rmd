@@ -1,12 +1,12 @@
 ---
-title: 'Analysis of Lobster Abundance along the Santa Barbara Coast'
+title: 'Analysis of Lobster Size & Abundance along the Santa Barbara Coast'
 author: "Indigo Bannister & Gavriella Keyles"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE)
 ```
 
 
@@ -53,8 +53,11 @@ lobster_clean <- lobster_abun %>%
 ### Introduction
 Gavi to write paragraph here on introduction. 
 
-![<font size="1"> **Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman</font>](https://www.flickr.com/people/26216388@N02).](images/California_Spiny_Lobster.jpg)
+<center>
+![](images/California_Spiny_Lobster.jpg){ width=75% }
+\center
 
+<font size="1"> **Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman</font>](https://www.flickr.com/people/26216388@N02).
 
 ### Data & Methods
 Data for California spiny lobster abundance and size along the Santa Barbara Coast, 2012-2018, were collected by the [Santa Barbara Coastal Long Term Ecological Research group](https://sbclter.msi.ucsb.edu/). Data was collected annually at five long term kelp forest study sites. Two of the sites were located within Marine Protected Areas (Naples and Isla Vista) and three were outside of a MPA (Arroyo Quemado, Mohawk and Carpinteria). Lobsters were counted and sizes estimated visually by divers in late summer before fishing season began. For more information on the methods, see the project [metadata](https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-sbc.77.3).
@@ -85,9 +88,7 @@ graph_a <- ggplot(lobster_a, aes(color = site_name, x = year, y = annual_total))
   scale_color_manual(values = site_colors, name = "Site") +
   labs(
     x = "",
-    y = "Total lobsters counted",
-    title = "Year-over-year lobster count change", #IB would recommend removing title since we have a figure caption
-    subtitle = "Santa Barbara County") +
+    y = "Total lobsters counted") +
   theme(plot.title = element_text(hjust = 0.5))+
   scale_x_continuous(limits = c(2012, 2018),
                      expand = c(0,0),
@@ -151,9 +152,9 @@ graph_b <- ggplot() +
   labs(x = "Lobster size (mm)",
        y = "Study sites") + 
   scale_x_continuous(limits = c(40,120))+
-  annotate("text", x = 115, y = 1.75, label = "2012", color = "#2E8289", fontface = 1.8, size = 4)+
-  annotate("text", x = 115, y = 1.25, label = "2018", color = "#EAAE37", fontface = 1.8, size = 4)+
-  annotate("text", x = 115, y = 2.15, label = "Legend", color = "black", fontface = 2, size = 4)
+  annotate("text", x = 115, y = 1.75, label = "2012", color = "#2E8289", fontface = 2, size = 6)+
+  annotate("text", x = 115, y = 1.25, label = "2018", color = "#EAAE37", fontface = 2, size = 6) #+
+  #annotate("text", x = 115, y = 2.15, label = "Legend", color = "black", fontface = 2, size = 4)
 
 # Call graph_b
 graph_b
@@ -170,7 +171,7 @@ graph_b
 #### 3. Analysis of lobsters in marine protected areas versus non-protected areas
 Add description of analysis here. 
 
-```{r}
+```{r, include = FALSE}
 # Part C
 
 # Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
@@ -240,7 +241,7 @@ lobster_sum %>%
                      "Sample Size")) %>% 
   kable_styling(bootstrap_options = c("striped", "hover"), 
                 full_width = F,
-                position = "left"
+                position = "center"
                 )
 
 
