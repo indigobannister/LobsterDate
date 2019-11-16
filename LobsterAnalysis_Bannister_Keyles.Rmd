@@ -249,7 +249,7 @@ lobster_sum %>%
 INDIGO TO ADD TABLE HEADER
 GAVI TO ADD INLINE REFERENCES
 
-\
+Mean lobster size differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* < `r round(size_ttest_2012$p.value)`). 
 
 ### Summary (INDIGO)
 
