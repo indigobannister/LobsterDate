@@ -1,6 +1,7 @@
 ---
 title: 'Analysis of Lobster Size & Abundance along the Santa Barbara Coast'
 author: "Indigo Bannister & Gavriella Keyles"
+date: "November 18, 2019"
 output: 
   html_document: 
     css: bootstrap.css
@@ -50,6 +51,7 @@ lobster_clean <- lobster_abun %>%
   mutate(site_name = factor(site_name, levels = c("Isla Vista","Naples","Arroyo Quemado","Carpinteria","Mohawk") ))
 
 ```
+\
 
 ### Introduction
 Gavi to write paragraph here on introduction. 
@@ -61,15 +63,11 @@ Gavi to write paragraph here on introduction.
 <font size="1"> **Figure 1:** California Spiny Lobsters off Anacapa Island. Photographer: [Ed Bierman</font>](https://www.flickr.com/people/26216388@N02).
 
 ### Data & Methods
-Data for California spiny lobster abundance and size along the Santa Barbara Coast, 2012-2018, were collected by the [Santa Barbara Coastal Long Term Ecological Research group](https://sbclter.msi.ucsb.edu/). Data was collected annually at five long term kelp forest study sites. Two of the sites were located within Marine Protected Areas (Naples and Isla Vista) and three were outside of a MPA (Arroyo Quemado, Mohawk and Carpinteria). Lobsters were counted and sizes estimated visually by divers in late summer before fishing season began. For more information on the methods, see the project [metadata](https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-sbc.77.3).
-
-ADD SOMETHING HERE ABOUT ANALYSIS. Similar to "Mean griffin range area (km2) was compared for pre-dragon (1984 - 2004) and post-dragon (2005 - 2019) periods by two-sample t-tests (α = 0.05 throughout). Trends in Griffin abundance were compared before and after dragon reintroduction by linear regression. All analyses and figures were prepared using R software version 3.6.1."
+Data for California spiny lobster abundance and size along the Santa Barbara Coast, 2012-2018, were collected by the [Santa Barbara Coastal Long Term Ecological Research group](https://sbclter.msi.ucsb.edu/). Data was collected annually at five long term kelp forest study sites. Two of the sites were located within Marine Protected Areas (Naples and Isla Vista) and three were outside of a MPA (Arroyo Quemado, Mohawk and Carpinteria). Lobsters were counted and sizes estimated visually by divers in late summer before fishing season began. For more information on the methods, see the project [metadata](https://portal.edirepository.org/nis/metadataviewer?packageid=knb-lter-sbc.77.3). Mean lobster size (mm) was compared for 2012 and 2018 at the non-MPA and MPA sites by two-sample t-tests ($\alpha$ = 0.05 throughout). In addition, mean lobster size was compared  pre-MPA (2012) and post-MPA (2018). All analyses and figures were prepared using R software version 3.6.1.
 
 \
 
 ### Results
-
-\
 
 #### 1. Annual lobster abundance by site, 2012-2018
 **Analysis:** Figure 2 demonstrates varying trends in lobster abundance among the 5 collection sites. At Isla Vista and Naples, both located within Marine Protected Areas, lobster abundance trends positive after the MPAs were established in 2012. Both MPA sites saw spikes in 2015, and declines in 2016 followed by increases in population. At non-MPA sites, counts are highly variable and characteristics between sites are not shared. At Arroyo Quemado, lobster counts remained relatively stable over the studied time period. At Carpinteria, a major spike in lobster abundance (2017) was followed by a major decline (2018). At Mohawk, a spike in abundance in 2015 gives way to stability into 2018.
@@ -88,8 +86,13 @@ site_colors <- park_palette("Everglades")
 
 ```{r,fig.align="center",fig.width=10}
 # Create graph of lobster abundance from 2012 to 2018
-graph_a <- ggplot(lobster_a, aes(color = site_name, x = year, y = annual_total)) +
-  geom_line() +
+graph_a <- ggplot(lobster_a, ) +
+  geom_line( aes(color = site_name, 
+                 x = year, 
+                 y = annual_total,
+                 text = paste('Site:', site_name,
+                          '<br>Total:', annual_total),
+                 group = 1)) +
   theme_minimal() +
   scale_color_manual(values = site_colors, name = "Site") +
   labs(
@@ -103,7 +106,7 @@ graph_a <- ggplot(lobster_a, aes(color = site_name, x = year, y = annual_total))
                      expand = c(0,0))
 
 # Make graph_a interactive with ggplotly 
-ggplotly(graph_a, tooltip = c("site_name", "y")) %>%
+ggplotly(graph_a, tooltip = "text") %>%
   config(displayModeBar = FALSE)
 
 # This website has lots of resources to customize ggplotly https://plotly-r.com/controlling-tooltips.html 
