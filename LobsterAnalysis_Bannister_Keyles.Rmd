@@ -1,8 +1,9 @@
 ---
 title: 'Analysis of Lobster Size & Abundance along the Santa Barbara Coast'
 author: "Indigo Bannister & Gavriella Keyles"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
-output: html_document
+output: 
+  html_document: 
+    css: bootstrap.css
 ---
 
 ```{r setup, include=FALSE}
@@ -64,6 +65,8 @@ Data for California spiny lobster abundance and size along the Santa Barbara Coa
 
 ADD SOMETHING HERE ABOUT ANALYSIS. Similar to "Mean griffin range area (km2) was compared for pre-dragon (1984 - 2004) and post-dragon (2005 - 2019) periods by two-sample t-tests (α = 0.05 throughout). Trends in Griffin abundance were compared before and after dragon reintroduction by linear regression. All analyses and figures were prepared using R software version 3.6.1."
 
+\
+
 ### Results
 
 \
@@ -80,7 +83,10 @@ lobster_a <- lobster_clean %>%
 
 # Create a custom palette for colors in graph_a
 site_colors <- park_palette("Everglades")
+```
 
+
+```{r,fig.align="center",fig.width=10}
 # Create graph of lobster abundance from 2012 to 2018
 graph_a <- ggplot(lobster_a, aes(color = site_name, x = year, y = annual_total)) +
   geom_line() +
@@ -114,7 +120,6 @@ ggplotly(graph_a, tooltip = c("site_name", "y")) %>%
 
 Lobster sizes at the non-MPA sites stayed relatively stable across the time duration with median sizes not shifting greatly. 
 
-
 ```{r}
 # Create two dataframes filtered for size analysis, one for lobster size data in 2012 and the other for 2018
 lobster_2018 <- lobster_clean %>% 
@@ -133,7 +138,10 @@ lobster_2018_med <- lobster_2018 %>%
 lobster_2012_med <- lobster_2012 %>% 
   group_by(site_name) %>% 
   summarize(median = median(size_mm))
+```
 
+
+```{r,fig.align="center",fig.width=10,fig.height=7}
 # Create graph of lobster size distribution for 2012 and 2018 at each site
 graph_b <- ggplot() +
   geom_density_ridges(data = lobster_2012, 
@@ -153,7 +161,7 @@ graph_b <- ggplot() +
        y = "Study sites") + 
   scale_x_continuous(limits = c(40,120))+
   annotate("text", x = 115, y = 1.75, label = "2012", color = "#2E8289", fontface = 2, size = 6)+
-  annotate("text", x = 115, y = 1.25, label = "2018", color = "#EAAE37", fontface = 2, size = 6) #+
+  annotate("text", x = 115, y = 1.5, label = "2018", color = "#EAAE37", fontface = 2, size = 6) #+
   #annotate("text", x = 115, y = 2.15, label = "Legend", color = "black", fontface = 2, size = 4)
 
 # Call graph_b
