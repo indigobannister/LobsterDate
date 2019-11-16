@@ -249,7 +249,17 @@ lobster_sum %>%
 INDIGO TO ADD TABLE HEADER
 GAVI TO ADD INLINE REFERENCES
 
-Mean lobster size differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* < `r round(size_ttest_2012$p.value)`). 
+In 2012, mean lobster size differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* = `r round(size_ttest_2012$p.value, 4)`).
+
+In 2018, mean lobster size also differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2018$parameter, 2)`) = `r round(size_ttest_2018$statistic, 2)`, *p* = `r size_ttest_2018$p.value`).
+
+#Indigo, need to figure out how to cut to a few significant digits when given such a small answer?
+
+Between MPA sites, we do see a significant difference in mean lobster sizes between 2012 and 2018 (t(`r round(ttest_MPA$parameter, 2)`) = `r round(ttest_MPA$statistic, 2)`, *p* = `r ttest_MPA$p.value`).
+
+Between non-MPA sites, we do not see a significant difference between mean lobster size between 2012 and 2018. Therefore we do not have sufficient evidence to say that we should reject the null hypothesis that mean lobster size is the same (t(`r round(ttest_nonMPA$parameter, 2)`) = `r round(ttest_nonMPA$statistic, 2)`, *p* = `r round(ttest_nonMPA$p.value, 2)`).
+
+
 
 ### Summary (INDIGO)
 
