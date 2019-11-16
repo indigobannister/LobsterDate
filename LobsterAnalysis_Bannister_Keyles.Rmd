@@ -107,11 +107,9 @@ graph_a <- ggplot(lobster_a, ) +
 
 # Make graph_a interactive with ggplotly 
 ggplotly(graph_a, tooltip = "text") %>%
+  layout(legend = list(x = 0.05, y = 0.85)) %>% 
   config(displayModeBar = FALSE)
 
-# This website has lots of resources to customize ggplotly https://plotly-r.com/controlling-tooltips.html 
-
-# IB played around and tried to get more space between years and beginning of graph - have not been able to get there yet. Also in midst of getting all of legend on one line. 
 ```
 
 <font size="1"> ***Figure 2: Year-over-year change, lobsters counted in 5 Santa Barbara Channel sites, 2012-2018.*** *Annual lobsters counts based on data collected by divers before the start of fishing season in late summer at five sites, two of which (Isla Vista and Naples) are within Marine Protected Areas (MPA).* ***Interactive:*** *double-click on individual site within legend to highlight. Single-click and unclick sites to toggle visibility and compare site data.*</font>
@@ -119,10 +117,6 @@ ggplotly(graph_a, tooltip = "text") %>%
 \
 
 #### 2. Lobster size: 2012 to 2018
-**Analysis:** Figure 3 depicts size abundance trends amongst lobsters in 2012 and 2018 at the five collection sites. Both sites that established MPAs in 2012 (Isla Vista and Naples) had more larger lobsters by 2018 than they did when the MPAs were established. Median sizes for Isla Vista lobsters increased from MAKE INLINE (61 mm to 78 mm), while median sizes for Naples lobsters increased from MAKE INLINE (70 mm to 80.5 mm).
-
-Lobster sizes at the non-MPA sites stayed relatively stable across the time duration with median sizes not shifting greatly. 
-
 ```{r}
 # Create two dataframes filtered for size analysis, one for lobster size data in 2012 and the other for 2018
 lobster_2018 <- lobster_clean %>% 
@@ -142,7 +136,9 @@ lobster_2012_med <- lobster_2012 %>%
   group_by(site_name) %>% 
   summarize(median = median(size_mm))
 ```
+**Analysis:** Figure 3 depicts size abundance trends amongst lobsters in 2012 and 2018 at the five collection sites. Both sites that established MPAs in 2012 (Isla Vista and Naples) had more larger lobsters by 2018 than they did when the MPAs were established. Median sizes for Isla Vista lobsters increased from  (`r lobster_2012_med$median[1]` mm to `r lobster_2018_med$median[1]` mm), while median sizes for Naples lobsters increased from (`r lobster_2012_med$median[2]` mm to `r lobster_2018_med$median[2]` mm).
 
+Lobster sizes at the non-MPA sites stayed relatively stable across the time duration with median sizes not shifting greatly. 
 
 ```{r,fig.align="center",fig.width=10,fig.height=7}
 # Create graph of lobster size distribution for 2012 and 2018 at each site
@@ -169,8 +165,6 @@ graph_b <- ggplot() +
 
 # Call graph_b
 graph_b
-
-# Talk to Gavi about x-scale 
 
 ```
 
@@ -260,15 +254,13 @@ lobster_sum %>%
 INDIGO TO ADD TABLE HEADER
 GAVI TO ADD INLINE REFERENCES
 
-In 2012, mean lobster size differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* = `r round(size_ttest_2012$p.value, 4)`).
+In 2012, mean lobster size differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* `r ifelse( 0.001 > size_ttest_2012$p.value, "< 0.001", paste("= ", round(size_ttest_2012$p.value,4)))`).
 
-In 2018, mean lobster size also differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2018$parameter, 2)`) = `r round(size_ttest_2018$statistic, 2)`, *p* = `r size_ttest_2018$p.value`).
+In 2018, mean lobster size also differed significantly between MPA and non-MPA sites (t(`r round(size_ttest_2018$parameter, 2)`) = `r round(size_ttest_2018$statistic, 2)`, *p* `r ifelse( 0.001 > size_ttest_2018$p.value, "< 0.001", paste("= ", round(size_ttest_2018$p.value,4)))`).
 
-#Indigo, need to figure out how to cut to a few significant digits when given such a small answer?
+Between MPA sites, we do see a significant difference in mean lobster sizes between 2012 and 2018 (t(`r round(ttest_MPA$parameter, 2)`) = `r round(ttest_MPA$statistic, 2)`, *p* `r ifelse( 0.001 > ttest_MPA$p.value, "< 0.001", paste("= ", round(ttest_MPA$p.value,4)))`).
 
-Between MPA sites, we do see a significant difference in mean lobster sizes between 2012 and 2018 (t(`r round(ttest_MPA$parameter, 2)`) = `r round(ttest_MPA$statistic, 2)`, *p* = `r ttest_MPA$p.value`).
-
-Between non-MPA sites, we do not see a significant difference between mean lobster size between 2012 and 2018. Therefore we do not have sufficient evidence to say that we should reject the null hypothesis that mean lobster size is the same (t(`r round(ttest_nonMPA$parameter, 2)`) = `r round(ttest_nonMPA$statistic, 2)`, *p* = `r round(ttest_nonMPA$p.value, 2)`).
+Between non-MPA sites, we do not see a significant difference between mean lobster size between 2012 and 2018. Therefore we do not have sufficient evidence to say that we should reject the null hypothesis that mean lobster size is the same (t(`r round(ttest_nonMPA$parameter, 2)`) = `r round(ttest_nonMPA$statistic, 2)`, *p* `r ifelse( 0.001 > ttest_nonMPA$p.value, "< 0.001", paste("= ", round(ttest_nonMPA$p.value,2)))`).
 
 
 
