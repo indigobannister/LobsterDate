@@ -55,7 +55,7 @@ lobster_clean <- lobster_abun %>%
 \
 
 ### Introduction
-The Santa Barbara Coastal Long-Term Ecological Research (SBC LTER) is an interdiscplinary research program focused on the nearshore waters of Southern California, including the Santa Barbara Channel. The Channel is home to many marine organisms including marine mammals, seabirds, invertebrates and fish, and spiny lobsters are an important predator in the giant kelp forests of the Channel. The SBC LTER tracks spiny lobster abundance and size in five sites along the channel: Naples, Isla Vista, Carpinteria, Arroyo Quemado, and Mohawk. Naples and Isla Vista are located in Marine Protected Areas (MPA). In this analysis, we used to data provided by SBC LTER to explore differences in lobster size and abundance among the five sites, between 2012 and 2018. Visual data exploration, along with statistical testing (Student's T Test and Cohen's Effect Size) suggest that, over time, sites located *within* MPAs saw increased lobster abundance and size between 2012 and 2018. For non-MPA sites, changes in size and abundance are less clear. This may suggest that protected areas enable lobsters to grow and reproduce better than non-protected areas.
+The Santa Barbara Coastal Long-Term Ecological Research (SBC LTER) is an interdiscplinary research program focused on the nearshore waters of Southern California, including the Santa Barbara Channel. The Channel is home to many marine organisms including marine mammals, seabirds, invertebrates and fish; spiny lobsters are an important predator in the giant kelp forests of the Channel. The SBC LTER tracks spiny lobster abundance and size in five sites along the channel: Naples, Isla Vista, Carpinteria, Arroyo Quemado, and Mohawk. Naples and Isla Vista are located in Marine Protected Areas (MPA). In this analysis, we use data provided by SBC LTER to explore differences in lobster size and abundance among the five sites, between 2012 and 2018. Visual data exploration, along with statistical testing (Student's T Test and Cohen's Effect Size) suggest that, over time, sites located *within* MPAs saw increased lobster abundance and size between 2012 and 2018. For non-MPA sites, changes in size and abundance are less clear. This may suggest that protected areas enable lobsters to grow and reproduce better than non-protected areas.
 
 
 <center>
@@ -161,9 +161,13 @@ graph_b <- ggplot() +
   labs(x = "Lobster size (mm)",
        y = "Study sites") + 
   scale_x_continuous(limits = c(40,120))+
-  annotate("text", x = 115, y = 1.75, label = "2012", color = "#2E8289", fontface = 2, size = 6)+
-  annotate("text", x = 115, y = 1.5, label = "2018", color = "#EAAE37", fontface = 2, size = 6) #+
-  #annotate("text", x = 115, y = 2.15, label = "Legend", color = "black", fontface = 2, size = 4)
+  annotate("text", x = 116, y = 1.75, label = "2012", color = "#2E8289", fontface = 2, size = 5)+
+  annotate("text", x = 116, y = 1.5, label = "2018", color = "#EAAE37", fontface = 2, size = 5) +
+  annotate(geom = "rect", color = "black", alpha = 0, xmin = 110, xmax = 120, ymin = 1.3, ymax = 1.95)+
+  annotate(geom = "point", x = 112, y = 1.75, color = "#2E8289", size = 4, alpha = .4) +
+  annotate(geom = "point", x = 112, y = 1.5, color = "#EAAE37", size = 4, alpha = .4)+
+  annotate("text", x = 115, y = 2.1, label = "Year", color = "black", size = 5)
+#annotate("text", x = 115, y = 2.15, label = "Legend", color = "black", fontface = 2, size = 4)
 
 # Call graph_b
 graph_b
