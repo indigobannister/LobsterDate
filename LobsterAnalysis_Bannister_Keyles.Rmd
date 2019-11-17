@@ -56,7 +56,7 @@ lobster_clean <- lobster_abun %>%
 ### Introduction
 The Santa Barbara Channel is home to many marine organisms including marine mammals, seabirds, invertebrates and fish. California spiny lobsters (*Panulirus interruptus*) are an important species in the giant kelp forests of the Channel. From October through March, Spiny lobsters are subject to both sport and commercial fishing through the use of hoop nets and lobster traps (CDFW, 2019). The commercial fishery revenue in 2016 was almost $16 million, making it the third highest grossing fishery in California (CDFW, 2017). 
 
-The Santa Barbara Coastal Long-Term Ecological Research (SBC LTER) is an interdiscplinary research program focused on the nearshore waters of Southern California, including the Santa Barbara Channel. The SBC LTER tracks spiny lobster abundance and size in five sites along the channel: Naples, Isla Vista, Carpinteria, Arroyo Quemado, and Mohawk. Naples and Isla Vista are located in or near Marine Protected Areas (MPA) that were established on January 1, 2012 by California Fish and Wildlife. Both recreational and commercial fishing is prohibited within the MPAs, allowing for an opportunity to examine the impacts of fishing on lobster abundance and size.
+The Santa Barbara Coastal Long-Term Ecological Research (SBC LTER) is an interdiscplinary research program focused on the nearshore waters of Southern California, including the Santa Barbara Channel (MSI, 2019). The SBC LTER tracks spiny lobster abundance and size in five sites along the channel: Naples, Isla Vista, Carpinteria, Arroyo Quemado, and Mohawk. Naples and Isla Vista are located in or near Marine Protected Areas (MPA) that were established on January 1, 2012 by California Fish and Wildlife. Both recreational and commercial fishing is prohibited within the MPAs, allowing for an opportunity to examine the impacts of fishing on lobster abundance and size.
 
 In this analysis, we use data provided by SBC LTER to explore differences in lobster size and abundance among the five sites, between 2012 and 2018. Analysis suggests that, over time, sites located *within* MPAs saw increased lobster abundance and size between 2012 and 2018. For non-MPA sites, changes in size and abundance are less clear. This may suggest that protected areas allow lobsters to grow and reproduce better than than non-protected areas.
 
@@ -298,6 +298,8 @@ Within non-MPA sites, there was not a significant difference (t(`r round(ttest_n
 **California Department of Fish and Wildlife (CDFW). 2017.** [South Coast Fishery Spotlight: California Spiny Lobster.](https://nrm.dfg.ca.gov/FileHandler.ashx?DocumentID=141295&inline)
 
 **California Department of Fish and Wildlife (CDFW). 2019.** [Current 2019-2020 Recreational Lobster Fishing Information.](https://www.wildlife.ca.gov/Conservation/Marine/Invertebrates/Lobster)
+
+**Marine Science Institute, UCSB (MSI). 2019.** [Santa Barbara Coastal LTER.](https://sbclter.msi.ucsb.edu/)
 
 **Reed D. 2019.** [SBC LTER: Reef: Abundance, size and fishing effort for California Spiny Lobster (Panulirus interruptus), ongoing since 2012.](https://doi.org/10.6073/pasta/a593a675d644fdefb736750b291579a0) Environmental Data Initiative. Dataset accessed 10/30/2019.
 
