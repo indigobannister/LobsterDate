@@ -26,7 +26,6 @@ library(tidyr)
 library(here)
 library(janitor)
 library(ggridges)
-# library(viridis)
 library(plotly)
 library(extrafont)
 library(nationalparkcolors)
@@ -192,7 +191,7 @@ In order to assess whether MPA status had an impact on lobster size and abundanc
 ```{r, include = FALSE}
 # Part C
 
-# Cleaning the data, used mutate and ifelse statement to make new MPA status variable. Boom!
+# Cleaning the data, used mutate and ifelse statement to make new MPA status variable.
 lobster_c <- lobster_clean %>% 
   mutate(mpa_status = 
            ifelse(site %in% c("IVEE", "NAPL"), "MPA", "non-MPA"))
