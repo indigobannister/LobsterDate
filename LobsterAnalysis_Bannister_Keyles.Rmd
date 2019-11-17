@@ -85,7 +85,7 @@ site_colors <- park_palette("Everglades")
 ```
 
 
-```{r,fig.align="center",fig.width=10}
+```{r,fig.align="center",out.width="100%"}
 # Create graph of lobster abundance from 2012 to 2018
 graph_a <- ggplot(lobster_a, ) +
   geom_line( aes(color = site_name, 
@@ -261,11 +261,10 @@ lobster_sum %>%
 
 ```
 INDIGO TO ADD TABLE HEADER
-GAVI TO ADD INLINE REFERENCES
 
 In 2012, mean lobster size differed significantly between MPA (m = `r round(size_ttest_2012$estimate[1], 2)`) and non-MPA (m = `r round(size_ttest_2012$estimate[2], 2)`) sites (t(`r round(size_ttest_2012$parameter, 2)`) = `r round(size_ttest_2012$statistic, 2)`, *p* = `r round(size_ttest_2012$p.value, 4)`), with a moderate effect size (`r round(cohen_2012$estimate, 2)`). This suggests a smaller mean lobster size (95% confidence interval = `r round(size_ttest_2012$conf.int, 4)`) at MPA sites vs non-MPA sites in 2012.
 
-In 2018, mean lobster size also differed significantly between MPA (m = `r round(size_ttest_2018$estimate[1], 2)`) and non-MPA (m = `r round(size_ttest_2018$estimate[2], 2)`) sites (t(`r round(size_ttest_2018$statistic, 2)`, *p* `r ifelse( 0.001 > size_ttest_2018$p.value, "< 0.001", paste("= ", round(size_ttest_2018$p.value, 2)))`), with a small effect size (`r round(cohen_2012$estimate, 2)`). This suggests a smaller mean lobster size (95% confidence interval = `r round(size_ttest_2018$conf.int, 4)`) at non-MPA sites vs MPA sites in 2018.
+In 2018, mean lobster size also differed significantly between MPA (m = `r round(size_ttest_2018$estimate[1], 2)`) and non-MPA (m = `r round(size_ttest_2018$estimate[2], 2)`) sites (t(`r round(size_ttest_2018$statistic, 2)`, *p* `r ifelse( 0.001 > size_ttest_2018$p.value, "< 0.001", paste("= ", round(size_ttest_2018$p.value, 2)))`), with a small effect size (`r round(cohen_2018$estimate, 2)`). This suggests a smaller mean lobster size (95% confidence interval = `r round(size_ttest_2018$conf.int, 4)`) at non-MPA sites vs MPA sites in 2018.
 
 Between MPA sites, we do see a significant difference in mean lobster sizes between 2012 (m = `r round(ttest_MPA$estimate[1], 2)`) and 2018 (m = `r round(ttest_MPA$estimate[2], 2)`), (t(`r round(ttest_MPA$parameter, 2)`) = `r round(ttest_MPA$statistic, 2)`, *p* `r ifelse( 0.001 > ttest_MPA$p.value, "< 0.001", paste("= ", round(ttest_MPA$p.value, 4)))`), with a large effect size (`r round(cohen_MPA$estimate, 2)`).
 
