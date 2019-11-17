@@ -55,7 +55,8 @@ lobster_clean <- lobster_abun %>%
 \
 
 ### Introduction
-Gavi to write paragraph here on introduction. 
+The Santa Barbara Coastal Long-Term Ecological Research (SBC LTER) is an interdiscplinary research program focused on the nearshore waters of Southern California, including the Santa Barbara Channel. The Channel is home to many marine organisms including marine mammals, seabirds, invertebrates and fish, and spiny lobsters are an important predator in the giant kelp forests of the Channel. The SBC LTER tracks spiny lobster abundance and size in five sites along the channel: Naples, Isla Vista, Carpinteria, Arroyo Quemado, and Mohawk. Naples and Isla Vista are located in Marine Protected Areas (MPA). In this analysis, we used to data provided by SBC LTER to explore differences in lobster size and abundance among the five sites, between 2012 and 2018. Visual data exploration, along with statistical testing (Student's T Test and Cohen's Effect Size) suggest that, over time, sites located *within* MPAs saw increased lobster abundance and size between 2012 and 2018. For non-MPA sites, changes in size and abundance are less clear. This may suggest that protected areas enable lobsters to grow and reproduce better than non-protected areas.
+
 
 <center>
 ![](images/California_Spiny_Lobster.jpg){ width=75% }
@@ -252,7 +253,7 @@ lobster_sum %>%
                      "MPA Status", 
                      "Mean (mm)",
                      "Standard Deviation (mm)",
-                     "Sample Size")) %>% 
+                     "Sample Size (count)")) %>% 
   kable_styling(bootstrap_options = c("striped", "hover"), 
                 full_width = F,
                 position = "center"
